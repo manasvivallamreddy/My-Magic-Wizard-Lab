@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Word Wizard Lab</title>
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: lightblue;
+        }
+
+        h1, h3 {
+            color: darkblue;
+        }
+
+        .box {
+            background: white;
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+
+    <h1 class="mb-1">My Word Wizard Lab</h1>
+    <p class="text-muted mb-4">
+        Transform words, explore parts of words, search for clues, and build your own list!
+    </p>
+
+    <!-- TOPIC 1: TO UPPERCASE() AND TO LOWERCASE() -->
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h3 class="card-title">Change the Word</h3>
+
+            <input
+                id="wordIn"
+                class="form-control mb-2"
+                placeholder="Type a word (try: Magic)">
+
+            <button class="btn btn-primary mr-2" onclick="makeUpper()">
+                MAKE BIG!
+            </button>
+
+            <button class="btn btn-primary" onclick="makeLower()">
+                make small
+            </button>
+
+            <div id="caseResult" class="box p-3 mt-3 rounded">
+                Type a word and choose a button!
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOPIC 2: SLICE() -->
+    
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h3 class="card-title">Cut out part of the Word</h3>
+
+            <input
+                id="sliceIn"
+                class="form-control mb-2"
+                placeholder="Type a word (try: Adventure)">
+
+            <button class="btn btn-primary" onclick="sliceWord()">
+                Take the first 4 letters
+            </button>
+
+            <div id="sliceResult" class="box p-3 mt-3 rounded">
+                Your word will be cut into a smaller piece!
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOPIC 3: INCLUDES() -->
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h3 class="card-title">Find the Secret Word</h3>
+
+            <p>
+                The secret message is:
+                <strong>"The brave wizard found a golden key."</strong>
+            </p>
+
+            <input
+                id="secretIn"
+                class="form-control mb-2"
+                placeholder="Search for a word">
+
+            <button class="btn btn-primary" onclick="checkWord()">
+                Search!
+            </button>
+
+            <div id="secretResult" class="box p-3 mt-3 rounded">
+                Type a word to see if it is hiding in the sentence!
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOPIC 4: ARRAYS AND PUSH) -->
+    
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h3 class="card-title">Build Your Magic List</h3>
+
+            <input
+            id="itemIn"
+            class="form-control mb-2"
+            placeholder="Add an item (try: Wand)">
+
+            <button class="btn btn-primary" onclick="addItem()"> Add to List </button>
+
+            <div id="listResult" class="box p-3 mt-3 rounded">
+                Your list is empty. Add your first magic item!
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOPIC 4: IF... ELSE... -->
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h3 class="card-title">Choose Your Adventure</h3>
+
+            <input
+                id="ageIn"
+                class="form-control mb-2"
+                placeholder="Enter your age">
+
+            <button class="btn btn-primary" onclick="checkAge()"> Check </button>
+
+            <div id="ageResult" class="box p-3 mt-3 rounded">
+                Enter your age to discover your adventure!
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        //TOPIC 1: TOUPPERCASE() AND LOWERCASE()
+
+        function makeUpper() {
+
+            var word = document.getElementById("wordIn").value;
+
+            document.getElementById("caseResult").innerHTML =
+            "Original: " + word +
+            "<br>Uppercase: " + word.toUpperCase();
+
+        }
+
+        function makeLower() {
+
+            var word = document.getElementById("wordIn").value;
+
+            document.getElementById("caseResult").innerHTML =
+            "Original: " + word +
+            "<br>Lowercase: " + word.toLowerCase();
+        }
+
+        //TOPIC 2: SLICE()
+
+        function sliceWord() {
+
+            var word = document.getElementById("sliceIn").value;
+
+            var piece = word.slice(0, 4);
+
+            document.getElementById("sliceResult").innerHTML =
+            "Your word: " + word +
+            "<br>First 4 letters: " + piece;
+        }
+
+        //TOPIC 3: INCLUDES()
+
+        function checkWord() {
+
+            var secret = "The brave wizard found a golden key.";
+
+            var word = document.getElementById("secretIn").value;
+
+            if (secret.toLowerCase().includes(word.toLowerCase())) {
+
+                document.getElementById("secretResult").innerHTML = 
+                "Yes! '" + word + "' is hiding in the secret message.";
+            } 
+            else {
+                document.getElementById("secretResult").innerHTML = 
+                "Nope! '" + word + "' is not in the secret message.";
+            }
+        }
+    
+        //TOPIC 4: ARRAYS AND PUSH()
+
+        var magicItems = [];
+
+        function addItem() {
+
+            var item = document.getElementById("itemIn").value;
+
+            if (item === "") {
+
+                document.getElementById("listResult").innerHTML =
+                "Please type an item first!";
+
+            } else {
+
+                magicItems.push(item);
+
+                document.getElementById("listResult").innerHTML =
+                "Magic list: " + magicItems.join(", ") +
+                "<br>Total items: " + magicItems.length;
+            }
+        }
+
+        //TOPIC 5: IF... ELSE...
+
+        function checkAge() {
+
+            var age = Number(document.getElementById("ageIn").value);
+
+            if (age < 10) {
+                document.getElementById("ageResult").innerHTML =
+                "You are ready for the Beginner Adventure!";
+
+            } else if (age < 15) {
+
+                document.getElementById("ageResult").innerHTML =
+                "You are ready for the Explorer Adventure!";
+
+            } else {
+
+                document.getElementById("ageResult").innerHTML =
+                "You are ready for the Master Adventure!";
+
+            }
+        }
+
+    </script>
+
+</body>
